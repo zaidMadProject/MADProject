@@ -51,6 +51,44 @@ public class MainActivity extends AppCompatActivity {
             });
             alert.show();
             return;
+
+        }
+        // get the camera
+        getCamera();
+
+        // displaying button image
+        toggleButtonImage();
+
+
+        // Switch button click event to toggle flash on/off
+        btnSwitch.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                if (isFlashOn) {
+                    // turn off flash
+                    turnOffFlash();
+                } else {
+                    // turn on flash
+                    turnOnFlash();
+                }
+            }
+        });
+    }
+
+
+    // Get the camera
+    @SuppressLint("LongLogTag")
+    private void getCamera() {
+        if (camera == null) {
+            try {
+                camera = Camera.open();
+                params = camera.getParameters();
+            } catch (RuntimeException e) {
+                Log.e("Camera Error. Failed to Open. Error: ", e.getMessage());
+            }
         }
     }
+    }
+
 }
